@@ -1,6 +1,11 @@
 - Vite React App
 - Configured Tailwind css
-
+- Header
+- routing of App
+- Login Form
+- Sign Up Form
+- Form Validation
+- useRef Hook
 
 # Features
 - Login/SignUp
