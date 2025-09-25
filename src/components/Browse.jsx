@@ -1,8 +1,11 @@
 import React from 'react'
+import Hearder from './Hearder'
 
 const Browse = () => {
   return (
-    <div>Browse</div>
+    <div>
+      <Hearder/>
+    </div>
   )
 }
 

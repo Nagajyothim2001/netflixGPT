@@ -1,15 +1,19 @@
 import React, { useRef, useState } from 'react';
 import Hearder from './Hearder';
 import { checkValidData } from '../utils/validate';
-import {createUserWithEmailAndPassword ,signInWithEmailAndPassword } from "firebase/auth";
+import {createUserWithEmailAndPassword ,signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const naviagte = useNavigate()
+
+  const dispatch = useDispatch()
 
   const name = useRef(null);
   const email = useRef(null);
@@ -40,8 +44,22 @@ const Login = () => {
     )
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user);
-      naviagte("/")
+      updateProfile(user, {
+      displayName: name.current.value,
+      photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLOfv1543QS1cF3kFJTNRfBhKVWw8yoOdaKA&s"
+      }).then(() => {
+         const {uid, email, displayName, photoURL } = auth.currentUser;
+            dispatch(addUser(
+              { uid: uid,
+                email: email,
+                displayName: displayName,
+                photoURL:photoURL }
+            ))
+        naviagte("/browse")
+      }).catch((error) => {
+        setErrorMessage(error.message)
+      })
+      console.log(user)
       
     })
     .catch((error) => {
