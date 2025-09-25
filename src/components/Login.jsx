@@ -1,10 +1,15 @@
 import React, { useRef, useState } from 'react';
 import Hearder from './Hearder';
 import { checkValidData } from '../utils/validate';
+import {createUserWithEmailAndPassword ,signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../utils/firebase';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const naviagte = useNavigate()
 
   const name = useRef(null);
   const email = useRef(null);
@@ -20,14 +25,61 @@ const Login = () => {
       email.current?.value,
       password.current?.value
     );
-    setErrorMessage(message);
+
+    if(message) return;
+
+    //sign in/sign up logic
+
+      if(!isSignInForm) {
+        // sign up logic
+
+      createUserWithEmailAndPassword(
+      auth, 
+      email.current?.value,
+      password.current?.value 
+    )
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+      naviagte("/")
+      
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setErrorMessage(errorCode +"-" +errorMessage)
+    });
+
+      }
+      else {
+        // sign in logic
+        signInWithEmailAndPassword(
+          auth, 
+          email.current?.value,
+          password.current?.value
+        )
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user);
+          naviagte("/browse")
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+          
+        });
+
+      }
+      
+      setErrorMessage(message);
   };
 
   return (
     <div className="relative min-h-screen">
       <Hearder />
 
-      {/* Background Image */}
       <div className="absolute inset-0">
         <img
           src="https://cdn.mos.cms.futurecdn.net/rDJegQJaCyGaYysj2g5XWY.jpg"
@@ -36,7 +88,7 @@ const Login = () => {
         />
       </div>
 
-      {/* Login Form */}
+
       <form
         onSubmit={(e) => e.preventDefault()}
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-80 p-6 sm:p-10 w-[90%] max-w-md rounded-lg text-white"

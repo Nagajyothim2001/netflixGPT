@@ -6,6 +6,12 @@
 - Sign Up Form
 - Form Validation
 - useRef Hook
+- Firebase Setup
+- Deploying our app to production
+- Live Site: [https://netflixgpt-d4c0a.web.app/]
+- Create SignUp User Account
+- Implement Sign In user APi
+- Created Redux Store with userSlice
 
 # Features
 - Login/SignUp
@@ -21,3 +27,4 @@
 - NetflixGPT
   - Search bar
   - Movie Suggestions
+
