@@ -1,7 +1,8 @@
-import React from 'react'
-import Hearder from './Hearder'
+import Hearder from './Hearder';
+import useNowPlayingMovies from '../hooks/useNowPlayingMovies';
 
 const Browse = () => {
+  useNowPlayingMovies()
   return (
     <div>
       <Hearder/>

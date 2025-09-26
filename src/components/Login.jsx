@@ -3,15 +3,15 @@ import Hearder from './Hearder';
 import { checkValidData } from '../utils/validate';
 import {createUserWithEmailAndPassword ,signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
+
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const naviagte = useNavigate()
 
   const dispatch = useDispatch()
 
@@ -46,7 +46,7 @@ const Login = () => {
       const user = userCredential.user;
       updateProfile(user, {
       displayName: name.current.value,
-      photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLOfv1543QS1cF3kFJTNRfBhKVWw8yoOdaKA&s"
+      photoURL: USER_AVATAR
       }).then(() => {
          const {uid, email, displayName, photoURL } = auth.currentUser;
             dispatch(addUser(
@@ -55,7 +55,6 @@ const Login = () => {
                 displayName: displayName,
                 photoURL:photoURL }
             ))
-        naviagte("/browse")
       }).catch((error) => {
         setErrorMessage(error.message)
       })
@@ -79,8 +78,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          console.log(user);
-          naviagte("/browse")
+          console.log(user)
         })
         .catch((error) => {
           const errorCode = error.code;
