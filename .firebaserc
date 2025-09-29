@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "netflixgpt-d4c0a"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }
