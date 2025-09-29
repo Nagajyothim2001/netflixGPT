@@ -8,8 +8,13 @@ export const USER_AVATAR = "https://wallpapers.com/images/hd/netflix-profile-pic
 //   method: "GET",
 //   headers: {
 //     accept: "application/json",
-//     Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZGFjZWQ5MjU5MWQ3OWU3MmJmYzdjMzU3MmUyMjJmNCIsIm5iZiI6MTc1ODg2ODQ0OC43MzQwMDAyLCJzdWIiOiI2OGQ2MzNlMDYyZDI3YTJkZTc5MGFiZDkiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.qcHJK-LXGX1z5ML0f4ALRVMo1EK_WFf3ohdHfb7ibx4 "
+//     Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZGFjZWQ5MjU5MWQ3OWU3MmJmYzdjMzU3MmUyMjJmNCIsIm5iZiI6MTc1ODg2ODQ0OC43MzQwMDAyLCJzdWIiOiI2OGQ2MzNlMDYyZDI3YTJkZTc5MGFiZDkiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.qcHJK-LXGX1z5ML0f4ALRVMo1EK_WFf3ohdHfb7ibx4"
 //   }
 // };
 
-export const API_OPTIONS = "https://api.themoviedb.org/3/search/movie?query=Avengers&api_key=27499d88f1c775177c8c3c2529e21cdf&page=5"
+
+// export const API_OPTIONS = "https://api.themoviedb.org/3/search/movie?query=Avengers&api_key=27499d88f1c775177c8c3c2529e21cdf&page=1"
+
+
+export const API_KEY = "27499d88f1c775177c8c3c2529e21cdf";
+export const NOW_PLAYING_URL = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=${API_KEY}`;
